@@ -6,10 +6,12 @@ public class Maquina_de_vom_neumann {
     static String[] instrucoes = new String[tamanho_maximo_de_instrucoes];
     static int[] memoria = new int[tamanho_maximo_de_memoria];
     static int numInstrucoes = 0;
+    // registradores utilizados para a realização dos ciclos
     static int PC = 0;
     static int MBR = 0;
     static int MAR = 0;
     static String IR = "";
+    // inicialização de booleano para pular quando for 0 ou negativo
     static boolean zero = false;
     static boolean negativo = false;
 
@@ -91,6 +93,7 @@ public class Maquina_de_vom_neumann {
         System.out.println();
     }
 
+    // metodo para imprimir amemoria
     public static void verMemoria() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>Memoria<<<<<<<<<<<<<<<<<<<<");
         for (int i = 0; i < tamanho_maximo_de_memoria; i++) {
@@ -109,60 +112,87 @@ public class Maquina_de_vom_neumann {
 
             String[] aux = instrucoes[PC].split(" ");
             IR = aux[0];
-
+            // Recebe o conteudo de uma posição sa memoria e salva no mbr
             if (IR.equals("000001")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR = memoria[MAR];
                 System.out.println("exercendo oredem: MBR <- memoria[" + MAR + "] = " + MBR);
+
+                // Recebe posição e dado do usuario
             } else if (IR.equals("000010")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR = Integer.parseInt(aux[2].replace("#", ""));
                 memoria[MAR] = MBR;
                 System.out.println("exercendo oredem: memoria[" + MAR + "] <- " + MBR);
+
+                // Recebe o conteudo dele mesmo somando com o conteudo de uma posição de memoria
             } else if (IR.equals("000011")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR += memoria[MAR];
                 System.out.println("exercendo oredem: MBR <- MBR + memoria[" + MAR + "] = " + MBR);
+
+                // Recebe o conteudo dele mesmo diminuindo com o conteudo de uma posição de
+                // memoria
             } else if (IR.equals("000100")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR -= memoria[MAR];
                 System.out.println("exercendo oredem: MBR <- MBR - memoria[" + MAR + "] = " + MBR);
+
+                // Recebe o conteudo dele mesmo multiplicando com o conteudo de uma posição de
+                // memoria
             } else if (IR.equals("000101")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR *= memoria[MAR];
                 System.out.println("exercendo oredem: MBR <- MBR * memoria[" + MAR + "] = " + MBR);
+
+                // Recebe o conteudo dele mesmo dividindo com o conteudo de uma posição de
+                // memoria
             } else if (IR.equals("000110")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 if (memoria[MAR] != 0) {
                     MBR /= memoria[MAR];
                     System.out.println("exercendo oredem: MBR <- MBR / memoria[" + MAR + "] = " + MBR);
                 }
+
+                // Pula as instruções ate determinada linha
             } else if (IR.equals("000111")) {
                 PC = Integer.parseInt(aux[1].replace("#", "")) - 1;
                 System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump para "
                         + (Integer.parseInt(aux[1].replace("#", "")) - 1) + ")");
+
+                // Pula as instruções ate determinada linha se for igual a zero
             } else if (IR.equals("001000")) {
                 if (zero) {
                     PC = Integer.parseInt(aux[1].replace("#", "")) - 1;
                     System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump IF Z para "
                             + (Integer.parseInt(aux[1].replace("#", "")) - 1) + ")");
                 }
+
+                // Pula as instruções ate determinada linha se for negativo
             } else if (IR.equals("001001")) {
                 if (negativo) {
                     PC = Integer.parseInt(aux[1].replace("#", "")) - 1;
                     System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump IF N para "
                             + (Integer.parseInt(aux[1].replace("#", "")) - 1) + ")");
                 }
+
+                // Faz a raiz quadratica do MBR
             } else if (IR.equals("001010")) {
                 MBR = (int) Math.sqrt(MBR);
                 System.out.println("exercendo oredem: MBR <- raiz quadratica(MBR) = " + MBR);
+
+                // MBR subtrai MBR
             } else if (IR.equals("001011")) {
                 MBR -= MBR;
                 System.out.println("exercendo oredem: MBR <- 0");
+
+                // Uma posição recebe o conteudo de MBR
             } else if (IR.equals("001111")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 memoria[MAR] = MBR;
                 System.out.println("exercendo oredem: memoria[" + MAR + "] <- MBR = " + MBR);
+
+                // Finaliza a inserção das intruções
             } else if (IR.equals("001100")) {
                 System.out.println("exercendo oredem: NOP");
             } else {
@@ -182,7 +212,7 @@ public class Maquina_de_vom_neumann {
             if (!IR.startsWith("000111") && !IR.startsWith("001000") && !IR.startsWith("001001")) {
                 PC++;
             }
-
+            // coloca um deley na apresentação da execução
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -192,6 +222,7 @@ public class Maquina_de_vom_neumann {
         System.out.println("Instrucoes executadas.");
     }
 
+    // metodo para limpar a memoria e os registradores
     public static void limparTudo() {
         for (int i = 0; i < tamanho_maximo_de_instrucoes; i++) {
             instrucoes[i] = null;
