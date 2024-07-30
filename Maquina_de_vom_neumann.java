@@ -14,7 +14,7 @@ public class Maquina_de_vom_neumann {
     static boolean negativo = false;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner leia = new Scanner(System.in);
         int opcao;
 
         do {
@@ -28,11 +28,11 @@ public class Maquina_de_vom_neumann {
             System.out.println("5 - LIMPAR        ");
             System.out.println("6 - SAIR          ");
             System.out.print("Escolha uma opcao: ");
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+            opcao = leia.nextInt();
+            leia.nextLine();
 
             if (opcao == 1) {
-                inserirInstrucao(scanner);
+                inserirInstrucao(leia);
             } else if (opcao == 2) {
                 verInstrucoes();
             } else if (opcao == 3) {
@@ -48,10 +48,10 @@ public class Maquina_de_vom_neumann {
             }
         } while (opcao != 6);
 
-        scanner.close();
+        leia.close();
     }
 
-    public static void inserirInstrucao(Scanner scanner) {
+    public static void inserirInstrucao(Scanner leia) {
         if (numInstrucoes >= tamanho_maximo_de_instrucoes) {
             System.out.println("Numero maximo de instrucoes atingido.");
             return;
@@ -60,12 +60,12 @@ public class Maquina_de_vom_neumann {
         String codigo;
         do {
             System.out.print("Digite o codigo da instrucao (001100 para terminar as instrucoes): ");
-            codigo = scanner.nextLine();
+            codigo = leia.nextLine();
             if (!codigo.equals("001100")) {
                 System.out.print("Digite o operando 1: ");
-                String operando1 = scanner.nextLine();
+                String operando1 = leia.nextLine();
                 System.out.print("Digite o operando 2: ");
-                String operando2 = scanner.nextLine();
+                String operando2 = leia.nextLine();
                 String instrucao = codigo + " " + operando1 + " " + operando2;
                 instrucoes[numInstrucoes] = instrucao;
                 numInstrucoes++;
