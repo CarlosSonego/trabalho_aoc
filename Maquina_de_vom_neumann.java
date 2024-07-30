@@ -113,58 +113,58 @@ public class Maquina_de_vom_neumann {
             if (IR.equals("000001")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR = memoria[MAR];
-                System.out.println("Executando: MBR <- memoria[" + MAR + "] = " + MBR);
+                System.out.println("exercendo oredem: MBR <- memoria[" + MAR + "] = " + MBR);
             } else if (IR.equals("000010")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR = Integer.parseInt(aux[2].replace("#", ""));
                 memoria[MAR] = MBR;
-                System.out.println("Executando: memoria[" + MAR + "] <- " + MBR);
+                System.out.println("exercendo oredem: memoria[" + MAR + "] <- " + MBR);
             } else if (IR.equals("000011")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR += memoria[MAR];
-                System.out.println("Executando: MBR <- MBR + memoria[" + MAR + "] = " + MBR);
+                System.out.println("exercendo oredem: MBR <- MBR + memoria[" + MAR + "] = " + MBR);
             } else if (IR.equals("000100")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR -= memoria[MAR];
-                System.out.println("Executando: MBR <- MBR - memoria[" + MAR + "] = " + MBR);
+                System.out.println("exercendo oredem: MBR <- MBR - memoria[" + MAR + "] = " + MBR);
             } else if (IR.equals("000101")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 MBR *= memoria[MAR];
-                System.out.println("Executando: MBR <- MBR * memoria[" + MAR + "] = " + MBR);
+                System.out.println("exercendo oredem: MBR <- MBR * memoria[" + MAR + "] = " + MBR);
             } else if (IR.equals("000110")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 if (memoria[MAR] != 0) {
                     MBR /= memoria[MAR];
-                    System.out.println("Executando: MBR <- MBR / memoria[" + MAR + "] = " + MBR);
+                    System.out.println("exercendo oredem: MBR <- MBR / memoria[" + MAR + "] = " + MBR);
                 }
             } else if (IR.equals("000111")) {
                 PC = Integer.parseInt(aux[1].replace("#", "")) - 1;
-                System.out.println("Executando: PC <- " + (PC + 1) + " (Jump para "
+                System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump para "
                         + (Integer.parseInt(aux[1].replace("#", "")) - 1) + ")");
             } else if (IR.equals("001000")) {
                 if (zero) {
                     PC = Integer.parseInt(aux[1].replace("#", "")) - 1;
-                    System.out.println("Executando: PC <- " + (PC + 1) + " (Jump IF Z para "
+                    System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump IF Z para "
                             + (Integer.parseInt(aux[1].replace("#", "")) - 1) + ")");
                 }
             } else if (IR.equals("001001")) {
                 if (negativo) {
                     PC = Integer.parseInt(aux[1].replace("#", "")) - 1;
-                    System.out.println("Executando: PC <- " + (PC + 1) + " (Jump IF N para "
+                    System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump IF N para "
                             + (Integer.parseInt(aux[1].replace("#", "")) - 1) + ")");
                 }
             } else if (IR.equals("001010")) {
                 MBR = (int) Math.sqrt(MBR);
-                System.out.println("Executando: MBR <- raiz quadratica(MBR) = " + MBR);
+                System.out.println("exercendo oredem: MBR <- raiz quadratica(MBR) = " + MBR);
             } else if (IR.equals("001011")) {
-                MBR = 0;
-                System.out.println("Executando: MBR <- 0");
+                MBR -= MBR;
+                System.out.println("exercendo oredem: MBR <- 0");
             } else if (IR.equals("001111")) {
                 MAR = Integer.parseInt(aux[1].replace("#", ""));
                 memoria[MAR] = MBR;
-                System.out.println("Executando: memoria[" + MAR + "] <- MBR = " + MBR);
+                System.out.println("exercendo oredem: memoria[" + MAR + "] <- MBR = " + MBR);
             } else if (IR.equals("001100")) {
-                System.out.println("Executando: NOP (No Operation)");
+                System.out.println("exercendo oredem: NOP");
             } else {
                 System.out.println("Instrucao desconhecida: " + IR);
             }
