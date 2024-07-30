@@ -104,7 +104,8 @@ public class Maquina_de_vom_neumann {
     public static void executarInstrucoes() {
         while (PC < numInstrucoes) {
 
-            System.out.println("Ciclo de Instrucao " + (PC + 1) + ":");
+            System.out.println("Instrucao " + (PC + 1) + ":");
+            System.out.println("Estado dos registradores antes da ordem");
             System.out.println("PC = " + PC);
             System.out.println("MAR = " + MAR);
             System.out.println("MBR = " + MBR);
@@ -157,25 +158,29 @@ public class Maquina_de_vom_neumann {
                 // Pula as instruções ate determinada linha
             } else if (IR.equals("000111")) {
                 PC = Integer.parseInt(aux[1].replace("#", "")) - 1;
-                System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump para "
-                        + (Integer.parseInt(aux[1].replace("#", "")) - 1) + ")");
+                System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump para instrucao" + (PC + 1) + ")");
 
-                // Pula as instruções ate determinada linha se for igual a zero
+                // Pula as instruções ate determinada linha se o MBR for igual a 0
             } else if (IR.equals("001000")) {
-                if (zero) {
+                if (MBR == 0) {
                     PC = Integer.parseInt(aux[1].replace("#", "")) - 1;
-                    System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump IF Z para "
-                            + (Integer.parseInt(aux[1].replace("#", "")) - 1) + ")");
+                    System.out.println(
+                            "exercendo oredem: PC <- " + (PC + 1) + " (Jump IF Z para instrucao" + (PC + 1) + ")");
+                } else {
+                    System.out.println("Mbr!0:" + (MBR) + "Pulando para a proxima instrucao");
+                    PC++;
                 }
 
-                // Pula as instruções ate determinada linha se for negativo
+                // Pula as instruções ate determinada linha se o MBR for menor que 0
             } else if (IR.equals("001001")) {
-                if (negativo) {
+                if (MBR < 0) {
                     PC = Integer.parseInt(aux[1].replace("#", "")) - 1;
-                    System.out.println("exercendo oredem: PC <- " + (PC + 1) + " (Jump IF N para "
-                            + (Integer.parseInt(aux[1].replace("#", "")) - 1) + ")");
+                    System.out.println(
+                            "exercendo oredem: PC <- " + (PC + 1) + " (Jump IF N para instrucao" + (PC + 1) + ")");
+                } else {
+                    System.out.println("Mbr>=0" + (MBR) + "Pulando para a proxima instrucao");
+                    PC++;
                 }
-
                 // Faz a raiz quadratica do MBR
             } else if (IR.equals("001010")) {
                 MBR = (int) Math.sqrt(MBR);
@@ -194,15 +199,15 @@ public class Maquina_de_vom_neumann {
 
                 // Finaliza a inserção das intruções
             } else if (IR.equals("001100")) {
-                System.out.println("exercendo oredem: NOP");
+                System.out.println("encerrando ciclo de instrucao: NOP");
             } else {
-                System.out.println("Instrucao desconhecida: " + IR);
+                System.out.println("Digite uma instrucao valida: " + IR);
             }
 
             zero = (MBR == 0);
             negativo = (MBR < 0);
 
-            System.out.println("Estado após execução:");
+            System.out.println("Estado dos registradores apos da ordem:");
             System.out.println("PC = " + PC);
             System.out.println("MAR = " + MAR);
             System.out.println("MBR = " + MBR);
@@ -219,7 +224,7 @@ public class Maquina_de_vom_neumann {
                 System.out.println("Erro de interrupção: " + e.getMessage());
             }
         }
-        System.out.println("Instrucoes executadas.");
+        System.out.println("Todas as instrucoes executadas.");
     }
 
     // metodo para limpar a memoria e os registradores
