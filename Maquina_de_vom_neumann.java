@@ -92,7 +92,7 @@ public class Maquina_de_vom_neumann {
     }
 
     public static void verMemoria() {
-        System.out.println("Memoria:");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>Memoria<<<<<<<<<<<<<<<<<<<<");
         for (int i = 0; i < tamanho_maximo_de_memoria; i++) {
             System.out.printf("Endereco %d: %d\n", i, memoria[i]);
         }
