@@ -1,0 +1,9 @@
+GUIA PARA EXECUTAR O TRABALHO DE ARQUITETURA E ORGANIZAÇÃO DE COMPUTADORES
+
+>>>>> Se deseja compilar o programa pelo cmd ou terminal. 
+
+	1. Siga os passos descritos nesse link> https://pt.wikihow.com/Compilar-e-Executar-um-Programa-Java-Usando-o-Prompt-de-Comando
+	
+>>>>> Se deseja compilar o arquivo pelo vscode.
+	1. siga os passos descritos neste link>  https://code.visualstudio.com/docs/languages/java
+	2. abra o arquivo no vscode e compile e depois execute
